@@ -1,4 +1,11 @@
 #!/bin/bash
+# ============================================
+# Script Name: server-setup.sh
+# Purpose: Automates initial Ubuntu server setup
+# Author: Prajwal Pawar
+# Date: May 2026
+# Usage: bash server-setup.sh
+# ============================================
 
 echo "==========================================="
 echo "   Server Setup Script - DevOps Practice   "
