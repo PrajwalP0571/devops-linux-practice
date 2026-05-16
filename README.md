@@ -20,7 +20,7 @@
 | # | Script Name | Purpose | Status |
 |---|-------------|---------|--------|
 | 1 | [`server-setup.sh`](#1-server-setupsh) | Automates initial Ubuntu server setup | ✅ Complete |
-| 2 | [`monitor.sh`](#2-monitorsh) | Automates initial Ubuntu server setup | ✅ Complete |
+| 2 | [`monitor.sh`](#2-monitorsh) | Server Monitor Script | ✅ Complete |
 
 ---
 
@@ -141,7 +141,7 @@ Disk Free: 7.2G
 
 ---
 
-## 2. Server Monitor Script (`monitor.sh`)
+### 2. `monitor.sh`
 
 ### What this script does
 Monitors key server health metrics and logs them to a file.
