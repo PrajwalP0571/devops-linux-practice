@@ -20,6 +20,7 @@
 | # | Script Name | Purpose | Status |
 |---|-------------|---------|--------|
 | 1 | [`server-setup.sh`](#1-server-setupsh) | Automates initial Ubuntu server setup | ✅ Complete |
+| 2 | [`monitor.sh`](#2-monitorsh) | Automates initial Ubuntu server setup | ✅ Complete |
 
 ---
 
@@ -135,6 +136,47 @@ Disk Free: 7.2G
 > In real companies, this kind of script is the **first thing that runs** when a new server is provisioned.  
 > Tools like **Ansible** and **Terraform** later replace manual scripts like this —  
 > but understanding the underlying shell commands is essential for every DevOps engineer.
+
+---
+
+---
+
+## 2. Server Monitor Script (`monitor.sh`)
+
+### What this script does
+Monitors key server health metrics and logs them to a file.
+Tracks RAM availability, disk space, Nginx status, and active users.
+Designed to run automatically via cron job for continuous monitoring.
+
+### Prerequisites
+- Ubuntu 20.04 / 22.04 / 24.04
+- Nginx installed
+- sudo privileges
+
+### How to run manually
+```bash
+chmod +x monitor.sh
+./monitor.sh
+```
+
+### How to schedule with cron (every minute)
+```bash
+crontab -e
+# Add this line:
+* * * * * /home/ubuntu/devops-practice/linux/monitor.sh
+```
+
+### What gets monitored
+| Metric | Source Command |
+|---|---|
+| Available RAM | `free -m` |
+| Free Disk Space | `df -h` |
+| Nginx Service Status | `systemctl is-active nginx` |
+| Active Users | `who` |
+
+### Sample output (`server-monitor.log`)
+
+---
 
 ---
 
