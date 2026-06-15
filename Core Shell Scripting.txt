@@ -75,6 +75,86 @@ echo ${NAME/devops/mlops}  # replace devops with mlops
 echo ${NAME:0:6}           # substring, start=0, length=6 = devops
 
 
+Section 3: Conditionals — if/elif/else
+bash#!/bin/bash
 
+# Basic if
+if [ condition ]; then
+    # commands
+fi
+
+# if-else
+if [ condition ]; then
+    # commands
+else
+    # commands
+fi
+
+# if-elif-else
+if [ condition1 ]; then
+    # commands
+elif [ condition2 ]; then
+    # commands
+else
+    # commands
+fi
+Comparison operators — two types:
+bash# Numeric comparisons
+-eq    # equal to
+-ne    # not equal to
+-gt    # greater than
+-lt    # less than
+-ge    # greater than or equal
+-le    # less than or equal
+
+# String comparisons
+=      # equal
+!=     # not equal
+-z     # string is empty
+-n     # string is not empty
+
+# File checks
+-f     # file exists
+-d     # directory exists
+-r     # file is readable
+-w     # file is writable
+-x     # file is executable
+Real examples:
+bash#!/bin/bash
+
+# Numeric
+RAM=$(free -m | grep Mem | awk '{print $7}')
+if [ $RAM -lt 200 ]; then
+    echo "WARNING: Low memory - ${RAM}MB available"
+elif [ $RAM -lt 500 ]; then
+    echo "CAUTION: Memory getting low - ${RAM}MB available"
+else
+    echo "OK: Memory is healthy - ${RAM}MB available"
+fi
+
+# String
+ENV=$1
+if [ -z "$ENV" ]; then
+    echo "Error: No environment specified"
+    exit 1
+fi
+
+if [ "$ENV" = "prod" ]; then
+    echo "Deploying to PRODUCTION — extra caution"
+elif [ "$ENV" = "dev" ]; then
+    echo "Deploying to development"
+else
+    echo "Unknown environment: $ENV"
+    exit 1
+fi
+
+# File check
+CONFIG="/etc/nginx/nginx.conf"
+if [ -f "$CONFIG" ]; then
+    echo "Nginx config found"
+else
+    echo "Nginx config missing — aborting"
+    exit 1
+fi
 
 
