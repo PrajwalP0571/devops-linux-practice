@@ -299,3 +299,44 @@ log_error() {
 apt update || { log_error "apt update failed"; exit 1; }
 
 
+Hands-On — 3 Interview-Style Problem Statements
+Solve all 3. Write actual scripts, test them on your server, push to GitHub.
+
+Problem 1 — Service Health Checker
+Write a script health-check.sh that:
+
+Accepts a list of services as arguments (./health-check.sh nginx ssh docker)
+Checks if each service is running
+Prints a clear status for each
+At the end prints summary: X services running, Y services down
+Exits with code 1 if ANY service is down
+
+
+Problem 2 — Disk Space Alert
+Write a script disk-alert.sh that:
+
+Checks disk usage of root partition
+If usage is above 80% — print CRITICAL alert
+If usage is between 60-80% — print WARNING
+If below 60% — print OK
+Logs every check with timestamp to /var/log/disk-alert.log
+Script should accept threshold as argument: ./disk-alert.sh 60
+
+
+Problem 3 — User Management Script
+Write a script user-manager.sh that:
+
+Accepts two arguments: action and username (./user-manager.sh create john)
+Supports 3 actions: create, delete, status
+create — creates user, adds to a devops group, sets up home directory
+delete — removes user and home directory with confirmation prompt
+status — shows if user exists, their groups, and last login
+Validates arguments — exits with error if wrong action or missing username
+
+
+Rules:
+
+Use set -e, set -u at top of every script
+Every script must have proper error messages
+Push all 3 to your GitHub repo with updated README
+
