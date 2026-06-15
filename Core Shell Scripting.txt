@@ -52,6 +52,29 @@ bash./script.sh dev 8080 nginx
 # All arguments: dev 8080 nginx
 
 
+Section 2: User Input & String Operations
+bash# Taking input from user
+read -p "Enter environment: " ENV
+echo "Deploying to: $ENV"
+
+# Silent input (for passwords)
+read -sp "Enter password: " PASSWORD
+echo ""    # new line after silent input
+
+# Input with timeout
+read -t 10 -p "Enter choice (10 sec timeout): " CHOICE
+
+# String operations
+NAME="devops-engineer"
+
+echo ${#NAME}              # length of string = 15
+echo ${NAME^^}             # uppercase = DEVOPS-ENGINEER
+echo ${NAME,,}             # lowercase = devops-engineer
+echo ${NAME^}              # capitalize first letter
+echo ${NAME/devops/mlops}  # replace devops with mlops
+echo ${NAME:0:6}           # substring, start=0, length=6 = devops
+
+
 
 
 
