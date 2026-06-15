@@ -1,3 +1,57 @@
 Phase 1 — Core Shell Scripting
 
+Section 1: Variables & Data Types
+
+You've used variables already. Let me formalize everything properly.
+bash# Basic variable assignment — NO spaces around =
+NAME="Prajwal"
+AGE=25
+IS_DEVOPS=true
+
+# Accessing variables — use $
+echo $NAME
+echo "My name is $NAME and I am $AGE years old"
+
+# Curly braces — use when variable is next to text
+echo "${NAME}_backup"       # Prajwal_backup
+echo "$NAME_backup"         # empty — bash looks for variable NAME_backup
+
+# Read-only variables — cannot be changed
+readonly DB_HOST="prod-db.internal"
+DB_HOST="something-else"    # throws error
+
+# Unsetting variables
+unset NAME
+echo $NAME                  # empty now
+
+Special built-in variables — memorize these:
+bash$0      # name of the script itself
+$1, $2  # first, second argument passed to script
+$#      # total number of arguments passed
+$@      # all arguments as separate strings
+$?      # exit code of last command (0=success, non-zero=failure)
+$$      # PID of current script
+$USER   # current logged in user
+$HOME   # home directory path
+$PWD    # current directory
+
+Practical example:
+bash#!/bin/bash
+echo "Script name: $0"
+echo "First argument: $1"
+echo "Total arguments: $#"
+echo "All arguments: $@"
+echo "Current user: $USER"
+echo "Current directory: $PWD"
+
+Run it as:
+bash./script.sh dev 8080 nginx
+# Script name: ./script.sh
+# First argument: dev
+# Total arguments: 3
+# All arguments: dev 8080 nginx
+
+
+
+
 
