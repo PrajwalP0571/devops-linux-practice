@@ -209,3 +209,41 @@ for i in {1..10}; do
     echo $i
 done
 
+
+Section 5: Functions
+bash#!/bin/bash
+
+# Basic function
+function greet() {
+    echo "Hello, $1"
+}
+
+# Alternative syntax
+check_service() {
+    SERVICE=$1
+    STATUS=$(systemctl is-active $SERVICE)
+    if [ "$STATUS" = "active" ]; then
+        echo "✅ $SERVICE is running"
+    else
+        echo "❌ $SERVICE is down"
+    fi
+}
+
+# Function with return value
+# Note: functions return exit codes (0-255), not strings
+# Use echo to return string values
+
+get_available_ram() {
+    RAM=$(free -m | grep Mem | awk '{print $7}')
+    echo $RAM    # caller captures this with $()
+}
+
+# Calling functions
+greet "Prajwal"
+check_service nginx
+check_service docker
+
+AVAILABLE=$(get_available_ram)
+echo "Available RAM: ${AVAILABLE}MB"
+
+
