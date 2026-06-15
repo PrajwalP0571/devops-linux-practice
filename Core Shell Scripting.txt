@@ -158,3 +158,54 @@ else
 fi
 
 
+Section 4: Loops
+bash# for loop — iterate over list
+for item in item1 item2 item3; do
+    echo $item
+done
+
+# for loop — iterate over range
+for i in {1..5}; do
+    echo "Iteration: $i"
+done
+
+# for loop — C style
+for ((i=0; i<5; i++)); do
+    echo "Count: $i"
+done
+
+# while loop
+COUNT=0
+while [ $COUNT -lt 5 ]; do
+    echo "Count: $COUNT"
+    COUNT=$((COUNT + 1))
+done
+
+# until loop — runs until condition becomes true
+COUNT=0
+until [ $COUNT -eq 5 ]; do
+    echo "Count: $COUNT"
+    COUNT=$((COUNT + 1))
+done
+
+# Loop over files
+for file in /var/log/*.log; do
+    echo "Processing: $file"
+done
+
+# Loop over command output
+for user in $(cat /etc/passwd | awk -F: '{print $1}'); do
+    echo "User: $user"
+done
+
+# break and continue
+for i in {1..10}; do
+    if [ $i -eq 5 ]; then
+        continue    # skip 5
+    fi
+    if [ $i -eq 8 ]; then
+        break       # stop at 8
+    fi
+    echo $i
+done
+
