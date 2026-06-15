@@ -247,3 +247,55 @@ AVAILABLE=$(get_available_ram)
 echo "Available RAM: ${AVAILABLE}MB"
 
 
+Section 6: Exit Codes & Error Handling
+This is what separates beginner scripts from production-grade scripts.
+bash# Every command returns an exit code
+# 0 = success
+# non-zero = failure
+
+ls /existing-dir
+echo $?    # 0
+
+ls /nonexistent-dir
+echo $?    # 2 (non-zero = failed)
+
+# Exit codes in scripts
+exit 0     # success
+exit 1     # general error
+exit 2     # misuse of command
+Production error handling patterns:
+bash#!/bin/bash
+
+# Pattern 1 — exit immediately on any error
+set -e          # script stops if any command fails
+set -u          # treat unset variables as errors
+set -o pipefail # catch errors in pipes too
+
+# Always use these 3 at top of production scripts
+
+# Pattern 2 — check every critical command
+apt update
+if [ $? -ne 0 ]; then
+    echo "ERROR: apt update failed"
+    exit 1
+fi
+
+# Pattern 3 — cleaner with || operator
+apt update || { echo "ERROR: apt update failed"; exit 1; }
+
+# Pattern 4 — trap for cleanup on exit
+cleanup() {
+    echo "Cleaning up temporary files..."
+    rm -f /tmp/deploy_temp_*
+}
+trap cleanup EXIT    # runs cleanup() when script exits for any reason
+
+# Pattern 5 — logging errors
+LOG="/var/log/deploy.log"
+log_error() {
+    echo "[ERROR] $(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a $LOG
+}
+
+apt update || { log_error "apt update failed"; exit 1; }
+
+
